@@ -6,7 +6,7 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    imgUrl:{
+    imageUrl:{
         type:String,
         required:true,
     },
