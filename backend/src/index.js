@@ -5,6 +5,7 @@ import mainRouter from "./routes/mainRoutes.js";
 import { connectDB } from "./lib/db.js";
 import fileUpload from "express-fileupload";
 import path from "path";
+import cors from "cors"
 dotenv.config();
 const app = express();
 const __dirname = path.resolve();
@@ -21,6 +22,10 @@ app.use(
 );
 const PORT = process.env.PORT;
 app.use(express.json());
+app.use(cors({
+  origin:"http://localhost:3000",
+  credentials:true
+}))
 app.use("/api/v1", mainRouter);
 app.use((err, req, res, next) => {
   res
@@ -36,3 +41,5 @@ app.listen(PORT, async () => {
   await connectDB();
   console.log(`server is running on port ${PORT}`);
 });
+
+
