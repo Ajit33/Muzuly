@@ -1,12 +1,11 @@
 import { axiosInstance } from "@/lib/axios";
 import { User } from "@/types";
-import { error } from "node:console";
 import{create} from "zustand"
 
 interface chatStore{
     users:User[];
     fetchusers:()=>Promise<void>
-    isLoading:boolean,
+    isLoading:boolean
     error :string | null
 
 }
