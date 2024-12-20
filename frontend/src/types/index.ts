@@ -5,11 +5,11 @@ export interface song{
   title:string,
   artist:string,
   albumId:string |null ,
-  imageurl:string,
+  imageUrl:string,
   audioUrl:string,
   duration: number,
-  createdAt:Date,
-  updatedAt:Date
+  createdAt:string,
+  updatedAt:string
 }
 
 export interface Album{

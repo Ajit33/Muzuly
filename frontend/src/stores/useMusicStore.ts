@@ -8,7 +8,9 @@ interface MusicStore{
    albums:Album[],
    isLoading:Boolean,
    error:string | null,
+   currentAlbum:Album |null
    fetchAlbums:()=>Promise<void>
+   fetchAlbumById:(albumId:string)=>Promise<void>
 }
 
 
@@ -17,6 +19,7 @@ export const useMusicStore=create<MusicStore>((set)=>({
     songs:[],
     isLoading:false,
     error:null,
+    currentAlbum:null,
 
     fetchAlbums:async ()=>{
         set({
@@ -30,5 +33,20 @@ export const useMusicStore=create<MusicStore>((set)=>({
        } catch (error:any) {
         set({error:error.response.data.message})
        }
+    },
+    fetchAlbumById:async(albumId:string)=>{
+        set({
+            isLoading:true,
+            error:null 
+        })
+        try {
+            const response= await axiosInstance.get(`/album/${albumId}`);
+            set({currentAlbum:response.data})
+        } catch (error:any) {
+            set({error:error.response.data.message})    
+        }
+        finally{
+            set({isLoading:false})
+        }
     }
 }))
