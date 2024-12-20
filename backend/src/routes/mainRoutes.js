@@ -6,7 +6,7 @@ import songsRouter from "./songsRouter.js"
 import albumRouter from "./albumRoutes.js"
 import statsRoute from "./statsRoutes.js"
 const route=Router()
-route.use("/user",UserRouter)
+route.use("/users",UserRouter)
 route.use("/auth",authRouter)
 route.use("/admin",adminRouter)
 route.use("/songs",songsRouter)
