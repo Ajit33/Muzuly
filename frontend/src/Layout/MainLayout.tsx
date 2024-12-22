@@ -3,6 +3,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import FriendsActivity from '@/components/FriendsActivity'
 import { Outlet } from 'react-router-dom'
 import AudioPlayer from '@/components/AudioPlayer'
+import PlaybackController from '@/components/PlaybackController'
 
 const MainLayout = () => {
     const isMobile=false
@@ -25,6 +26,7 @@ const MainLayout = () => {
               <FriendsActivity />
         </ResizablePanel>
       </ResizablePanelGroup>
+      <PlaybackController />
     </div>
   )
 }
