@@ -6,9 +6,9 @@ import SongsTable from "./SongsTable";
 
 const SongsTabContent = () => {
     return (
-		<Card>
+		<Card className="bg-zinc-900 text-white">
 			<CardHeader>
-				<div className='flex items-center justify-between'>
+				<div className='flex items-center justify-between '>
 					<div>
 						<CardTitle className='flex items-center gap-2'>
 							<Music className='size-5 text-emerald-500' />
@@ -19,7 +19,7 @@ const SongsTabContent = () => {
 					<AddSongDialog />
 				</div>
 			</CardHeader>
-			<CardContent>
+			<CardContent >
 				<SongsTable />
 			</CardContent>
 		</Card>
