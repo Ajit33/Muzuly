@@ -27,3 +27,9 @@ export interface User{
   imageUrl:string,
   clerkId:string
 }
+export interface Stats{
+  totalSongs:number,
+  totalAlbums:number,
+  totalUsers:number,
+  totalArtists:number
+}
