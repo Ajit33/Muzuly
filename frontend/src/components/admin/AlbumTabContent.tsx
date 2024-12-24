@@ -1,10 +1,29 @@
+import { Library } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
+import AddAlbumDialog from "./AddAlbumDialog"
+import AlbumsTable from "./AlbumsTable"
 
 
 const AlbumTabContent = () => {
   return (
-    <div >
-      album
-    </div>
+    <Card className='bg-zinc-800/50 border-zinc-700/50'>
+			<CardHeader>
+				<div className='flex items-center justify-between'>
+					<div>
+						<CardTitle className='flex items-center gap-2 text-white'>
+							<Library className='h-5 w-5 text-violet-500' />
+							Albums Library
+						</CardTitle>
+						<CardDescription>Manage your album collection</CardDescription>
+					</div>
+					<AddAlbumDialog />
+				</div>
+			</CardHeader>
+
+			<CardContent>
+				<AlbumsTable />
+			</CardContent>
+		</Card>
   )
 }
 

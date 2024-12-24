@@ -81,18 +81,41 @@ try {
     next(error)
 }
 }
-export const deleteAlbum=async(req,res,next)=>{
+export const deleteAlbum = async (req, res, next) => {
     try {
-    const {id}=req.params
-     await Album.findByIdAndDelete(id)
-     res.status(200).json({
-        message:"Album deleted sucessfully !"
-     })
+      const { id } = req.params;
+  
+      // Validate ID
+      if (!id || !id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({
+          message: "Invalid album ID.",
+        });
+      }
+  
+      // Check if the album exists
+      const album = await Album.findById(id);
+      if (!album) {
+        return res.status(404).json({
+          message: "Album not found.",
+        });
+      }
+  
+      // Delete the album
+      await Album.findByIdAndDelete(id);
+  
+      res.status(200).json({
+        message: "Album deleted successfully!",
+      });
     } catch (error) {
-        console.log("Error in delete album",error)
-        next(error)
+      console.error("Error in deleteAlbum:", error);
+      res.status(500).json({
+        message: "An error occurred while deleting the album.",
+        error: error.message,
+      });
+      next(error); // Optionally pass the error to a global error handler
     }
-}
+  };
+  
 export const checkAdmin=async(req,res,next)=>{
     res.status(200).json({
         admin:true

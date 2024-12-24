@@ -153,7 +153,7 @@ export const useMusicStore=create<MusicStore>((set)=>({
     deleteAlbum:async(albumId)=>{
       set({isLoading:true,error:null})
       try {
-        await axiosInstance(`/admin/deleteAlbum/${albumId}`)
+        await axiosInstance.delete(`/admin/deleteAlbum/${albumId}`)
         set((state)=>({
           albums:state.albums.filter((album)=>album._id !== albumId)
         }))
