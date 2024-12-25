@@ -6,10 +6,14 @@ import { connectDB } from "./lib/db.js";
 import fileUpload from "express-fileupload";
 import path from "path";
 import cors from "cors"
+import { createServer } from "http";
+import { intializeSocket } from "./lib/socket.js";
 dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 app.use(clerkMiddleware());
+const httpServer=createServer(app)
+intializeSocket(httpServer)
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -37,7 +41,7 @@ app.use((err, req, res, next) => {
           : err.message
     });
 });
-app.listen(PORT, async () => {
+httpServer.listen(PORT, async () => {
   await connectDB();
   console.log(`server is running on port ${PORT}`);
 });
