@@ -5,7 +5,7 @@ import { Message } from "../model/messageModel.js";
 export const intializeSocket=(server)=>{
   const io=new Server(server,{
     cors:{
-        origin:"http://localhost3000",
+        origin:"http://localhost:3000",
         credentials:true
     }
   });
@@ -15,14 +15,14 @@ export const intializeSocket=(server)=>{
     socket.on("user_connected",(userId)=>{
         userSocket.set(userId,socket.id);
         userActivities.set(userId,"Idel");
-        io.emit("New_user_connected",userId)
+        io.emit("user_connected",userId)
 
-        socket.emit("online Users",Array.from(userSocket.keys()));
-        io.emit("activites",Array.from(userActivities.entries()))
+        socket.emit("users_online",Array.from(userSocket.keys()));
+        io.emit("activities",Array.from(userActivities.entries()))
     })
-    socket.on("update_activies",({userId,activity})=>{
+    socket.on("update_activity",({userId,activity})=>{
         userActivities.set(userId,activity);
-        io.emit("activity_updated",{userId,ActiveXObject})
+        io.emit("activity_updated",{userId,activity})
     })
     socket.on("send_message",async(data)=>{
       try {
