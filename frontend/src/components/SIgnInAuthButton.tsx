@@ -15,7 +15,7 @@ if(!isLoaded){
     return null
 }
   return (
-    <Button onClick={signInWithGoogle} variant={"secondary"}  className=" w-full text-white bg-slate-500  border-zinc-200 h-11">
+    <Button onClick={signInWithGoogle} variant={"outline"}  className=" w-full text-white bg-slate-500  border-zinc-200 h-11">
       Continue with google
     </Button>
   )

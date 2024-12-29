@@ -11,6 +11,7 @@ import Chat from './pages/Chat'
 import Album from './pages/Album'
 import Admin from './pages/Admin'
 import { Toaster } from 'react-hot-toast'
+import NotFound from './components/NotFound'
 
 function App() {
   return(
@@ -24,6 +25,7 @@ function App() {
      <Route path='/' element={<Home />} />
      <Route path='/chat' element={<Chat />} />
      <Route path='/album/:albumId' element={<Album />} />
+     <Route path="*" element={<NotFound />} />
      </Route>
    </Routes>
    <Toaster />

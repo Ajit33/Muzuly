@@ -8,10 +8,18 @@ import path from "path";
 import cors from "cors"
 import { createServer } from "http";
 import { intializeSocket } from "./lib/socket.js";
+import cron from "node-cron"
+import fs from "fs"
 dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 app.use(clerkMiddleware());
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"../frontend/dist")))
+  app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../frontend/dist/index.html"))
+  })
+}
 const httpServer=createServer(app)
 intializeSocket(httpServer)
 app.use(
@@ -24,6 +32,20 @@ app.use(
     },
   })
 );
+const tempdir=path.join(process.cwd(),"temp")
+cron.schedule("0 * * * *",()=>{
+ if(fs.existsSync(tempdir)) {
+   fs.readdir(tempdir,(err,files)=>{
+    if(err){
+      console.log("error",err)
+      return;
+    }
+    for(const file of files){
+      fs.unlink(path.join(tempdir,file),(err)=> {})
+    }
+   })
+ }
+})
 const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors({

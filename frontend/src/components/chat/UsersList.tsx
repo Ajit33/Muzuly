@@ -5,7 +5,6 @@ import { useChatStore } from "@/stores/useChatStore";
 
 const UsersList = () => {
 	const { users, selectedUser, isLoading, setSelectedUser, onlineUsers } = useChatStore();
-  console.log("online h ",onlineUsers)
 	return (
 		<div className='border-r border-zinc-800'>
 			<div className='flex flex-col h-full'>

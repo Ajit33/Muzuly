@@ -22,7 +22,7 @@ const TopBar = () => {
       </Link>
         )}
         <SignedOut>
-          <SIgnInAuthButton />
+          <SIgnInAuthButton  />
         </SignedOut>
         <UserButton />
       </div>
