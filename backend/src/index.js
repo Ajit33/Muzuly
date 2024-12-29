@@ -14,12 +14,6 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 app.use(clerkMiddleware());
-if(process.env.NODE_ENV==="production"){
-  app.use(express.static(path.join(__dirname,"../frontend/dist")))
-  app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../frontend/dist/index.html"))
-  })
-}
 const httpServer=createServer(app)
 intializeSocket(httpServer)
 app.use(
@@ -53,6 +47,14 @@ app.use(cors({
   credentials:true
 }))
 app.use("/api/v1", mainRouter);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("*", (req, res) => {
+    if (!req.originalUrl.startsWith("/api")) {
+      res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+    }
+  });
+}
 app.use((err, req, res, next) => {
   res
     .status(500)
